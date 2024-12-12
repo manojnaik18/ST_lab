@@ -1,77 +1,59 @@
 from selenium import webdriver
-
 from selenium.webdriver.common.by import By
-
 import time
 
 class GoogleFormAutomation:
+    def setUp(self):
+        self.driver = webdriver.Chrome()  
 
-def setUp(self):
+    def fill_form(self):
+        try:
+            self.driver.get("https://docs.google.com/forms/d/e/1FAIpQLSezs9vfDnGxHrXsF52bxKXdrmlQHbHI0HsxrO6A9PGbC3K0Xw/viewform?usp=sf_link")
+            time.sleep(2)
 
-self.driver = webdriver.Chrome() # Ensure ChromeDriver is in your PATH
+            name = "Prabhu Deva"
+            name_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            name_input.send_keys(name)
+            time.sleep(2)
 
-def fill_form(self):
+            age = "25"
+            age_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            age_input.send_keys(age)
+            time.sleep(2)
 
-try:
+            email = "prabhudeva76@gmail.com"
+            email_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            email_input.send_keys(email)
+            time.sleep(2)
 
-# Open the Google Form
+            country = "India"
+            country_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            country_input.send_keys(country)
+            time.sleep(2)
 
-self.driver.get("https://docs.google.com/forms/d/e/1FAIpQLSezs9vfDnGxHrXsF52bxKXdrmlQHbHI0HsxrO6A9PGbC3K0Xw/viewform?usp=sf_link")
+            city = "Chennai"
+            city_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            city_input.send_keys(city)
+            time.sleep(2)
 
-time.sleep(2)
+            area = "Teynampet"
+            area_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            area_input.send_keys(area)
+            time.sleep(2)
 
-name = "Prabhu Deva"
+            submit = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div')
+            submit.click()
 
-name_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
+            time.sleep(5) 
 
-name_input.send_keys(name)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
 
-age = "25"
-
-age_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
-
-age_input.send_keys(age)
-
-email = "prabhudeva76@gmail.com"
-
-email_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
-
-email_input.send_keys(email)
-
-country = "India"
-
-country_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[4]/div/div/div[2]/div/div[1]/div/div[1]/input')
-
-country_input.send_keys(country)
-
-city = "Chennai"
-
-city_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[5]/div/div/div[2]/div/div[1]/div/div[1]/input')
-city_input.send_keys(city)
-area = "Teynampet"
-
-area_input = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[6]/div/div/div[2]/div/div[1]/div/div[1]/input')
-
-area_input.send_keys(area)
-submit = self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[7]/div/div/div[2]/div/div[1]/div')
-submit.click()
-
-time.sleep(2) 
-
-except Exception as e:
-
-print(f"An error occurred: {str(e)}")
-
-def tearDown(self)
-
-self.driver.quit()
+    def tearDown(self):
+        self.driver.quit()
 
 if __name__ == "__main__":
-
-automation = GoogleFormAutomation()
-
-automation.setUp()
-
-automation.fill_form()
-
-automation.tearDown()
+    automation = GoogleFormAutomation()
+    automation.setUp()
+    automation.fill_form()
+    automation.tearDown()
